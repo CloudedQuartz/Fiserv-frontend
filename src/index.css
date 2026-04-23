@@ -1,0 +1,271 @@
+/* Minimal clean styling for the UPI Fraud Dashboard */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background: #f5f7fa;
+  color: #1a202c;
+  line-height: 1.5;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+header {
+  margin-bottom: 24px;
+}
+
+header h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1a202c;
+}
+
+header p {
+  color: #718096;
+  font-size: 0.95rem;
+}
+
+/* Health status badge */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+.status-badge.healthy {
+  background: #c6f6d5;
+  color: #22543d;
+}
+
+.status-badge.unhealthy {
+  background: #fed7d7;
+  color: #742a2a;
+}
+
+/* Cards */
+.card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.card h2 {
+  font-size: 1.1rem;
+  margin-bottom: 14px;
+  color: #2d3748;
+}
+
+/* Stats grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.stat-box {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  padding: 18px;
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #2b6cb0;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: #718096;
+  margin-top: 4px;
+}
+
+/* Form elements */
+textarea {
+  width: 100%;
+  min-height: 140px;
+  padding: 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-family: monospace;
+  font-size: 0.9rem;
+  resize: vertical;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: #4299e1;
+  box-shadow: 0 0 0 3px rgba(66,153,225,0.15);
+}
+
+button {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.btn-primary {
+  background: #2b6cb0;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #2c5282;
+}
+
+.btn-secondary {
+  background: #edf2f7;
+  color: #2d3748;
+  margin-left: 10px;
+}
+
+.btn-secondary:hover {
+  background: #e2e8f0;
+}
+
+.btn-export {
+  background: #38a169;
+  color: #fff;
+}
+
+.btn-export:hover {
+  background: #2f855a;
+}
+
+.actions {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.error-text {
+  color: #c53030;
+  font-size: 0.9rem;
+  margin-top: 8px;
+}
+
+/* Results table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+th, td {
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 1px solid #edf2f7;
+}
+
+th {
+  background: #f7fafc;
+  font-weight: 600;
+  color: #4a5568;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+tr:hover {
+  background: #f7fafc;
+}
+
+/* Risk score styling */
+.score-pill {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.score-low {
+  background: #c6f6d5;
+  color: #22543d;
+}
+
+.score-mid {
+  background: #fefcbf;
+  color: #744210;
+}
+
+.score-high {
+  background: #fed7d7;
+  color: #742a2a;
+}
+
+/* Flag badge */
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.badge-flagged {
+  background: #fc8181;
+  color: #fff;
+}
+
+.badge-safe {
+  background: #68d391;
+  color: #fff;
+}
+
+/* Reason codes */
+.reason-tag {
+  display: inline-block;
+  background: #edf2f7;
+  color: #4a5568;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  margin: 2px 4px 2px 0;
+}
+
+/* Alert banner */
+.alert-banner {
+  background: #fff5f5;
+  border-left: 4px solid #fc8181;
+  padding: 14px 18px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.alert-icon {
+  font-size: 1.3rem;
+}
+
+/* Empty state */
+.empty-state {
+  color: #a0aec0;
+  text-align: center;
+  padding: 30px 0;
+  font-size: 0.95rem;
+}
