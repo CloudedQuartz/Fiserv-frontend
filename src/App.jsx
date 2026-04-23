@@ -171,7 +171,7 @@ function App() {
         )}
       </header>
 
-      <StatsBar history={history} />
+      {history.totalTxns > 0 && <StatsBar history={history} />}
 
       <TransactionInput onClassify={handleClassify} loading={loading} error={error} />
 
