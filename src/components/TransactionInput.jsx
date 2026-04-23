@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 
 /**
  * TransactionInput
  * Provides a textarea for users to paste JSON array or JSONL transactions,
- * and a button to submit them for classification.
+ * or upload a .json / .jsonl file, and a button to submit them for classification.
  */
 const SAMPLE_JSON = `[
   {
@@ -28,6 +28,8 @@ const SAMPLE_JSON = `[
 
 function TransactionInput({ onClassify, loading, error }) {
   const [value, setValue] = useState(SAMPLE_JSON)
+  const [fileName, setFileName] = useState(null)
+  const fileInputRef = useRef(null)
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -36,13 +38,33 @@ function TransactionInput({ onClassify, loading, error }) {
 
   const loadSample = () => {
     setValue(SAMPLE_JSON)
+    setFileName(null)
+  }
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0]
+    if (!file) return
+
+    const reader = new FileReader()
+    reader.onload = (event) => {
+      setValue(event.target.result)
+      setFileName(file.name)
+    }
+    reader.onerror = () => {
+      alert('Failed to read file.')
+    }
+    reader.readAsText(file)
+  }
+
+  const triggerFileSelect = () => {
+    fileInputRef.current?.click()
   }
 
   return (
     <div className="card">
       <h2>Submit Transactions</h2>
       <p style={{ fontSize: '0.85rem', color: '#718096', marginBottom: 10 }}>
-        Paste a JSON array or JSONL (one object per line). All transactions should share the same payer_id.
+        Paste a JSON array or JSONL (one object per line), or upload a .json / .jsonl file. All transactions should share the same payer_id.
       </p>
       <form onSubmit={handleSubmit}>
         <textarea
@@ -58,7 +80,22 @@ function TransactionInput({ onClassify, loading, error }) {
           <button type="button" className="btn-secondary" onClick={loadSample}>
             Load Sample
           </button>
+          <button type="button" className="btn-secondary" onClick={triggerFileSelect}>
+            Upload File
+          </button>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept=".json,.jsonl,application/json"
+            style={{ display: 'none' }}
+            onChange={handleFileChange}
+          />
         </div>
+        {fileName && (
+          <p style={{ fontSize: '0.8rem', color: '#38a169', marginTop: 8 }}>
+            Loaded: {fileName}
+          </p>
+        )}
       </form>
     </div>
   )
