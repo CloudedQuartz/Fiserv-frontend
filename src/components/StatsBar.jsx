@@ -1,38 +1,34 @@
 import React from 'react'
 
-/**
- * StatsBar
- * Shows basic historical patterning using simple counters.
- * No ML — just aggregates from all classified batches in the current session.
- */
-function StatsBar({ history }) {
-  const {
-    totalTxns,
-    flaggedTxns,
-    avgRiskScore,
-    highVelocityCount,
-    midnightCount,
-  } = history
+const STAT_CONFIG = [
+  { key: 'totalTxns', label: 'Total Transactions', icon: '📊', color: 'blue' },
+  { key: 'flaggedTxns', label: 'Flagged', icon: '🚩', color: 'red' },
+  { key: 'avgRiskScore', label: 'Avg Risk Score', icon: '⚡', color: 'yellow', format: (v) => Math.round(v * 100) },
+  { key: 'highVelocityCount', label: 'High Velocity', icon: '⚠️', color: 'purple' },
+  { key: 'midnightCount', label: 'Midnight Events', icon: '🌙', color: 'purple' },
+]
 
-  const stats = [
-    { label: 'Total Transactions', value: totalTxns },
-    { label: 'Flagged Transactions', value: flaggedTxns },
-    {
-      label: 'Avg Risk Score (0-100)',
-      value: totalTxns > 0 ? Math.round(avgRiskScore * 100) : 0,
-    },
-    { label: 'High Velocity Events', value: highVelocityCount },
-    { label: 'Midnight Hour Events', value: midnightCount },
-  ]
+function StatsBar({ history }) {
+  const { totalTxns, flaggedTxns, avgRiskScore, highVelocityCount, midnightCount } = history
+
+  const values = { totalTxns, flaggedTxns, avgRiskScore, highVelocityCount, midnightCount }
 
   return (
-    <div className="stats-grid">
-      {stats.map((s) => (
-        <div className="stat-box" key={s.label}>
-          <div className="stat-value">{s.value}</div>
-          <div className="stat-label">{s.label}</div>
-        </div>
-      ))}
+    <div className="stats-grid fade-in">
+      {STAT_CONFIG.map((stat) => {
+        const rawValue = values[stat.key]
+        const displayValue = stat.format ? stat.format(rawValue) : rawValue
+
+        return (
+          <div className={`stat-card ${stat.color}`} key={stat.key}>
+            <div className="stat-header">
+              <div className={`stat-icon ${stat.color}`}>{stat.icon}</div>
+            </div>
+            <div className="stat-value">{displayValue}</div>
+            <div className="stat-label">{stat.label}</div>
+          </div>
+        )
+      })}
     </div>
   )
 }
